@@ -2,8 +2,24 @@
 <map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-up" width="17" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="1" name="Warstwa Kafelków 1" width="17" height="17">
-  <data encoding="base64" compression="zlib">
-   eJydUjEOwjAMTFmyAVElYAl0KLQToE6o/4H/PwFHiiXrZLuF4WSfbZ3dS5sQQvMnNivqidDWmIAv6UehUeKd8CA8Rd26IQLX9r2NOmomB1nRsGZL71bjS8zPos93t6J/JgyOZx+xNwqdwjvYk2t+EcDb8f04v0JtS9gR9oqGfGPPD+2Okh9q5Llf/GCNI2h4flgaJ0XD8mMJ7K3lRw/zM/Aednn/KfufgUvvo6GDfCKMK7/RwuTs+AJuWQxQ
-  </data>
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,
+1,1,1,1,2,1,1,17,19,17,17,17,19,17,1,1,1,
+1,1,1,1,1,7,1,17,1,46,47,48,1,17,2,1,1,
+1,1,1,7,1,1,1,17,1,1,1,1,101,17,1,1,1,
+1,2,1,1,1,17,17,17,17,17,17,17,29,17,1,1,1,
+17,17,17,17,17,17,1,38,1,56,1,1,58,17,1,7,1,
+19,1,1,30,39,17,1,1,1,1,1,102,1,17,7,1,7,
+17,32,1,1,58,29,1,31,31,31,1,1,1,17,2,1,1,
+17,1,1,37,1,17,1,14,15,16,1,1,1,17,19,17,1,
+17,17,17,17,17,17,1,31,31,31,1,1,31,22,31,17,1,
+19,1,1,30,39,17,1,1,1,1,1,1,31,23,31,17,1,
+17,32,1,1,58,29,1,1,1,1,1,1,31,24,31,17,1,
+17,1,1,37,1,17,1,1,1,1,1,1,1,1,1,17,2,
+17,17,17,17,17,17,36,1,1,1,58,1,1,1,36,17,1,
+1,2,1,1,1,17,17,17,19,17,29,17,19,17,17,17,1,
+7,1,2,1,1,1,2,1,1,1,50,40,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,50,1,1,1,2,1,1
+</data>
  </layer>
 </map>

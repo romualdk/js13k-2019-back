@@ -2,8 +2,22 @@
 <map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-up" width="9" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="1" name="tower" width="9" height="15">
-  <data encoding="base64" compression="zlib">
-   eJylj70KgDAMhOuo4iDUwZ9FnFQcRB1Eff/X8gJXCCVOBj6SS46kdc65FBQG0g9RghwMipx97UlADTrQUlueXvHl+bsn+/hXZvxLso+0xAYm6pWelVr6OzhAw9nJWcgN58Gj70iuDI+P7vnIMyvPqerZ2KPfJPXI+QUexRLpG7wLdgzo
-  </data>
+  <data encoding="csv">
+0,9,13,13,13,13,13,9,0,
+0,17,11,35,35,35,11,17,0,
+0,17,1,25,28,27,1,17,0,
+0,17,1,33,33,33,1,17,0,
+0,17,1,25,28,27,1,17,0,
+0,17,1,33,33,33,1,17,0,
+0,10,13,13,13,13,13,10,0,
+0,17,11,17,20,17,11,17,0,
+51,42,17,49,20,49,17,42,52,
+53,26,20,57,17,57,17,26,53,
+53,26,17,20,17,20,21,26,53,
+53,26,20,17,49,20,20,26,53,
+53,43,20,17,57,20,17,43,53,
+53,26,20,20,57,17,20,41,53,
+59,61,61,61,45,61,61,61,60
+</data>
  </layer>
 </map>

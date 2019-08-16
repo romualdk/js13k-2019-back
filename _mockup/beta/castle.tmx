@@ -2,8 +2,17 @@
 <map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-up" width="9" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="1" name="Warstwa Kafelków 1" width="9" height="10">
-  <data encoding="base64" compression="zlib">
-   eJwzZmBgsMWDTYDYFIg5gZgXC+aEyoOwIBBzA7EyEuaGiiOrYYTSsmh8dDUgbITExqbGigg1MHOssKjhwuEvLiz+AtGGaHyQvDVamOmi8W2AGADfcQsm
-  </data>
+  <data encoding="csv">
+51,61,61,61,61,61,61,61,52,
+53,9,13,13,13,13,13,9,53,
+53,17,11,35,35,35,11,17,53,
+53,17,1,17,29,17,1,17,53,
+53,17,1,1,50,1,1,17,53,
+53,17,1,58,50,1,1,17,53,
+53,17,1,1,50,58,1,17,53,
+53,10,13,13,13,13,13,10,53,
+53,17,11,17,49,17,11,17,53,
+59,61,61,61,45,61,61,61,60
+</data>
  </layer>
 </map>
