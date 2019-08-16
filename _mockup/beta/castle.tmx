@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-up" width="9" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" source="tileset.tsx"/>
+ <layer id="1" name="Warstwa Kafelków 1" width="9" height="10">
+  <data encoding="base64" compression="zlib">
+   eJwzZmBgsMWDTYDYFIg5gZgXC+aEyoOwIBBzA7EyEuaGiiOrYYTSsmh8dDUgbITExqbGigg1MHOssKjhwuEvLiz+AtGGaHyQvDVamOmi8W2AGADfcQsm
+  </data>
+ </layer>
+</map>
