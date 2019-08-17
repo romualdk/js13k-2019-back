@@ -104,7 +104,7 @@ export const objects = {
       17, 21, 29, 21, 17
     ]
   },
- castle: {
+  castle: {
     width: 9,
     height: 10,
     data: [
