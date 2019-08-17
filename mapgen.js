@@ -13,17 +13,21 @@ const map = new Map(tls)
 function init () {
   const m1 = new Map(tls)
   m1.tower()
+  m1.drawSprites()
   document.body.appendChild(m1.image)
 
   const m2 = new Map(tls)
   m2.inn()
+  m2.drawSprites()
   document.body.appendChild(m2.image)
 
   const m3 = new Map(tls)
   m3.forest()
+  m3.drawSprites()
   document.body.appendChild(m3.image)
 
   const m4 = new Map(tls)
   m4.castleroom()
+  m4.drawSprites()
   document.body.appendChild(m4.image)
 }

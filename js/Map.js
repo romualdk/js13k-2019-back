@@ -11,6 +11,7 @@ export class Map {
     this.tileset = tileset
     this.data = []
     this.objects = []
+    this.sprites = []
   }
 
   tower () {
@@ -25,6 +26,7 @@ export class Map {
     this.putStruct(10, 83)
     this.putStruct(21, 86)
     this.fillObjects()
+    this.putSprite(16, 83, 'player')
     this.draw()
   }
 
@@ -33,6 +35,10 @@ export class Map {
     this.fill()
     this.putObject(8, 8, 'inn')
     this.fillObjects()
+    this.putSprite(18, 20, 'player')
+    this.putSprite(15, 15, 'barbarian')
+    this.putSprite(17, 15, 'rogue')
+    this.putSprite(16, 17, 'assassin')
     this.draw()
   }
 
@@ -49,6 +55,19 @@ export class Map {
     this.putStruct(27, 38)
     this.putStruct(25, 41)
     this.fillObjects()
+
+    this.putSprite(15, 28, 'bat')
+    this.putSprite(17, 29, 'bat')
+    this.putSprite(16, 36, 'ogre')
+    this.putSprite(15, 37, 'orc')
+    this.putSprite(17, 37, 'orc')
+    this.putSprite(17, 36, 'snake')
+    this.putSprite(14, 35, 'snake')
+
+    this.putSprite(16, 211, 'player')
+    this.putSprite(15, 210, 'barbarian')
+    this.putSprite(16, 210, 'rogue')
+    this.putSprite(17, 210, 'assassin')
     this.draw()
   }
 
@@ -57,6 +76,14 @@ export class Map {
     this.fill()
     this.putObject(8, 9, 'castleroom')
     this.fillObjects()
+    this.putSprite(16, 21, 'player')
+    this.putSprite(15, 20, 'barbarian')
+    this.putSprite(16, 20, 'rogue')
+    this.putSprite(17, 20, 'assassin')
+    this.putSprite(16, 12, 'boss')
+    this.putSprite(14, 16, 'crab')
+    this.putSprite(16, 15, 'fly')
+    this.putSprite(18, 16, 'scarab')
     this.draw()
   }
 
@@ -135,6 +162,10 @@ export class Map {
     this.putObject(x, y, 'struct' + (1 + Math.floor(Math.random() * 6)))
   }
 
+  putSprite (x, y, type) {
+    this.sprites.push({ x, y, type })
+  }
+
   draw () {
     const w = this.width
     const h = this.height
@@ -147,6 +178,16 @@ export class Map {
         const t = tls.getTile(this.data[x][y])
         this.image.ctx.drawImage(tls.image, t.x, t.y, t.width, t.height, x * t.width, y * t.height, t.width, t.height)
       }
+    }
+  }
+
+  drawSprites () {
+    let tls = this.tileset
+
+    for (let i in this.sprites) {
+      let spr = this.sprites[i]
+      let t = tls.getTile(tiles[spr.type])
+      this.image.ctx.drawImage(tls.image, t.x, t.y, t.width, t.height, spr.x * t.width, spr.y * t.height, t.width, t.height)
     }
   }
 }
