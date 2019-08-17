@@ -1,0 +1,25 @@
+{
+  "name": "js13k-2019-back",
+  "version": "1.0.0",
+  "description": "RPG game for js13kgames 2019",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard",
+    "start": "npx serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romualdk/js13k-2019-back.git"
+  },
+  "keywords": [
+    "rpg",
+    "game",
+    "js13k"
+  ],
+  "author": "Romuald Kowalczyk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/romualdk/js13k-2019-back/issues"
+  },
+  "homepage": "https://github.com/romualdk/js13k-2019-back#readme"
+}
