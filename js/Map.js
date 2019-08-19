@@ -26,7 +26,7 @@ export class Map {
     this.putStruct(10, 83)
     this.putStruct(21, 86)
     this.fillObjects()
-    this.putSprite(16, 83, 'player')
+    this.putSprite(16, 79, 'player')
     this.draw()
   }
 

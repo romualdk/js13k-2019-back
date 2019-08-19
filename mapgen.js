@@ -8,7 +8,6 @@ img.onload = init
 img.src = './img/tileset.png'
 
 const tls = new Tileset(img, 16, 16, 8)
-const map = new Map(tls)
 
 function init () {
   const m1 = new Map(tls)
