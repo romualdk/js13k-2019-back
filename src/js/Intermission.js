@@ -1,4 +1,4 @@
-import { getCanvas } from './canvas.js'
+import { Canvas } from './Canvas.js'
 
 const cols = 32
 const rows = 12
@@ -10,7 +10,7 @@ export class Intermission {
     this.ctxt = []
 
     this.fnt = this.game.fnt
-    this.canvas = getCanvas(cols * this.fnt.size, rows * this.fnt.size * 2)
+    this.canvas = Canvas(cols * this.fnt.size, rows * this.fnt.size * 2)
     this.time = 0
     this.line = 0
     this.linewait = 1

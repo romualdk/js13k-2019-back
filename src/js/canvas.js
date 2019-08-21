@@ -1,11 +1,11 @@
-export function getCanvas (width, height, elementId) {
-  const canvas = elementId
-    ? document.getElementById(elementId)
+export function Canvas (w, h, element) {
+  const c = element
+    ? document.getElementById(element)
     : document.createElement('canvas')
 
-  canvas.width = width
-  canvas.height = height
-  canvas.ctx = canvas.getContext('2d')
+  c.width = w
+  c.height = h
+  c.ctx = c.getContext('2d')
 
-  return canvas
+  return c
 }

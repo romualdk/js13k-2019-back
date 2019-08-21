@@ -1,5 +1,5 @@
 /* global Image */
-import { getCanvas } from './js/canvas.js'
+import { Canvas } from './js/Canvas.js'
 import { Tset } from './js/Tset.js'
 import { Loop } from './js/Loop.js'
 import { Tower } from './js/Tower.js'
@@ -59,10 +59,10 @@ function getScale (screen, camera) {
 }
 
 function onResize () {
-  Game.screen = getCanvas(window.innerWidth, window.innerHeight, 'screen')
+  Game.screen = Canvas(window.innerWidth, window.innerHeight, 'screen')
   Game.halfs = screenHalfs(Game.screen.width, Game.screen.height)
-  Game.screenA = getCanvas(Game.halfs.A.width, Game.halfs.A.height)
-  Game.screenB = getCanvas(Game.halfs.B.width, Game.halfs.B.height)
+  Game.screenA = Canvas(Game.halfs.A.width, Game.halfs.A.height)
+  Game.screenB = Canvas(Game.halfs.B.width, Game.halfs.B.height)
 
   Game.screenA.scale = getScale(Game.halfs.A, { width: CAMERA_WIDTH, height: CAMERA_HEIGHT })
   Game.screenB.scale = getScale(Game.halfs.B, { width: CAMERA_WIDTH, height: CAMERA_HEIGHT })
