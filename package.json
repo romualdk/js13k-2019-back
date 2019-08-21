@@ -5,7 +5,7 @@
   "scripts": {
     "test": "standard",
     "start": "npx serve",
-    "build": "webpack"
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,4 @@
+import { tile } from './Tset.js'
 import { Map } from './Map.js'
 import { Intermission } from './Intermission.js'
 import { tiles } from './objects.js'
@@ -71,7 +72,7 @@ export class Tower {
       x: this.map.sprites[0].x * 16,
       y: this.map.sprites[0].y * 16
     }
-    this.playerTile = this.game.tls.getTile(tiles.player)
+    this.playerTile = tile(this.game.tls, tiles.player)
 
     this.walks = false
   }
@@ -130,9 +131,9 @@ export class Tower {
     this.game.screenA.ctx.drawImage(this.map.image, sx, sy, sw, sh, dx, dy, dw, dh)
 
     this.overlay.ctx.clearRect(0, 0, this.map.image.width, this.map.image.height)
-    this.overlay.ctx.drawImage(this.game.tls.image,
-      this.playerTile.x, this.playerTile.y, this.playerTile.width, this.playerTile.height,
-      Math.floor(this.player.x), Math.floor(this.player.y), this.playerTile.width, this.playerTile.height)
+    this.overlay.ctx.drawImage(this.game.tls.img,
+      this.playerTile.x, this.playerTile.y, this.playerTile.w, this.playerTile.h,
+      Math.floor(this.player.x), Math.floor(this.player.y), this.playerTile.w, this.playerTile.h)
 
     this.game.screenA.ctx.drawImage(this.overlay, sx, sy, sw, sh, dx, dy, dw, dh)
 

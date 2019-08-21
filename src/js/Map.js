@@ -1,5 +1,6 @@
 import { getCanvas } from './canvas.js'
 import { tiles, objects } from './objects.js'
+import { tile } from './Tset.js'
 
 const segmentSize = 33
 
@@ -171,12 +172,12 @@ export class Map {
     const h = this.height
     const tls = this.tileset
 
-    this.image = getCanvas(w * tls.tilewidth, h * tls.tileheight)
+    this.image = getCanvas(w * tls.tw, h * tls.th)
 
     for (let x = 0; x < w; x++) {
       for (let y = 0; y < h; y++) {
-        const t = tls.getTile(this.data[x][y])
-        this.image.ctx.drawImage(tls.image, t.x, t.y, t.width, t.height, x * t.width, y * t.height, t.width, t.height)
+        const t = tile(tls, this.data[x][y])
+        this.image.ctx.drawImage(tls.img, t.x, t.y, t.w, t.h, x * t.w, y * t.h, t.w, t.h)
       }
     }
   }
@@ -186,8 +187,8 @@ export class Map {
 
     for (let i in this.sprites) {
       let spr = this.sprites[i]
-      let t = tls.getTile(tiles[spr.type])
-      this.image.ctx.drawImage(tls.image, t.x, t.y, t.width, t.height, spr.x * t.width, spr.y * t.height, t.width, t.height)
+      let t = tile(tiles[spr.type])
+      this.image.ctx.drawImage(tls.img, t.x, t.y, t.w, t.h, spr.x * t.w, spr.y * t.h, t.w, t.h)
     }
   }
 }

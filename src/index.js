@@ -1,10 +1,10 @@
 /* global Image */
 import { getCanvas } from './js/canvas.js'
-import { Tileset } from './js/Tileset.js'
+import { Tset } from './js/Tset.js'
 import { Loop } from './js/Loop.js'
 import { Tower } from './js/Tower.js'
 import { Inn } from './js/Inn.js'
-import { Font } from './js/Font.js';
+import { Font } from './js/Font.js'
 
 let loaded = 0
 
@@ -23,7 +23,7 @@ Game.imgFont.onload = load
 Game.imgFont.src = './img/font.png'
 
 Game.img = new Image()
-Game.tls = new Tileset(Game.img, 16, 16, 8)
+Game.tls = Tset(Game.img, 16, 16, 8)
 Game.img.onload = load
 Game.img.src = './img/tileset.png'
 
