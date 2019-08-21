@@ -1,12 +1,10 @@
 import { Intermission } from './Intermission.js'
 import { Canvas } from './Canvas.js'
-import { Tmap, fill, fillRand, set, put, img } from './Tmap.js'
 import { tile } from './Tset.js'
 import { Vec } from './Vec.js'
-import { relem } from './Math.js'
-import { OBJ, structs } from './OBJ.js'
-
-const easeInOutQuad = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
+import { towerMap } from './Maps.js'
+import { img } from './Tmap.js'
+import { easeInOutQuad } from './Ease.js'
 
 export const txt = [
   [
@@ -34,40 +32,13 @@ export const txtPl = [
   ]
 ]
 
-const SEG = 33
-
-// forest
-const F = [1, 1, 1, 2, 7, 7]
-
-// road
-const R = 50 // road
-const R1 = new Array(10).fill(1).concat(2)
-const R2 = new Array(4).fill(1).concat(new Array(4).fill(2))
-const RX = new Array(2).fill(R1).concat(new Array(2).fill(R2)).concat([F, F, F])
-
-const fillForest = (tmap) => {
-  fillRand(tmap, F)
-}
-
-const fillRoad = (tmap, start = 0) => {
-  const center = Math.floor(tmap.w / 2)
-
-  for (let y = start; y < tmap.h; y++) {
-    set(tmap, Vec(center, y), R)
-
-    for (let x = 0; x < RX.length; x++) {
-      set(tmap, Vec(center - x - 1, y), relem(RX[x]))
-      set(tmap, Vec(center + x + 1, y), relem(RX[x]))
-    }
-  }
-}
-
 export class Tower {
   constructor (Game) {
     this.game = Game
 
     this.inter = new Intermission(this.game, txt)
-    this.initMap()
+    this.map = towerMap()
+    this.map.image = img(this.map, this.game.tls)
     this.overlay = Canvas(this.map.image.width, this.map.image.height)
 
     this.start = Vec(16 * 16 - 8, 12 * 16)
@@ -94,29 +65,6 @@ export class Tower {
     this.playerTile = tile(this.game.tls, 97)
 
     this.walks = false
-  }
-
-  initMap () {
-    this.map = Tmap(SEG, SEG * 3)
-    fill(this.map, 1)
-    fillForest(this.map)
-    fillRoad(this.map, 70)
-
-    const o = [
-      [12, 65, OBJ.tower],
-      [24, 63, OBJ.graves],
-      [24, 80, OBJ.house],
-      [9, 82, relem(structs)],
-      [7, 84, relem(structs)],
-      [10, 83, relem(structs)],
-      [21, 86, relem(structs)]
-    ]
-
-    for (let i in o) {
-      put(this.map, Vec(o[i][0], o[i][1]), o[i][2])
-    }
-
-    this.map.image = img(this.map, this.game.tls)
   }
 
   prepare () {

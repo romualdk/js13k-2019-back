@@ -1,14 +1,11 @@
-import { Tmap, fill, put, img } from './Tmap.js'
-import { OBJ } from './OBJ.js'
-import { Vec } from './Vec.js'
+import { img } from './Tmap.js'
+import { innMap } from './Maps.js'
 
 export class Inn {
   constructor (Game) {
     this.game = Game
 
-    this.map = Tmap(33, 33)
-    fill(this.map, 1)
-    put(this.map, Vec(8, 8), OBJ.inn)
+    this.map = innMap()
     this.map.image = img(this.map, this.game.tls)
 
     this.pos = { x: 16 * 16, y: 17 * 16 }
@@ -17,8 +14,6 @@ export class Inn {
     this.height = 33 * 16
     this.halfWidth = this.width / 2
     this.halfHeight = this.height / 2
-
-    console.log('inn')
   }
 
   prepare () {
