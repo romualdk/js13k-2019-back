@@ -1,7 +1,7 @@
-import { Intermission } from './Intermission.js'
+import { Interm } from './Interm.js'
 import { Canvas } from './Canvas.js'
-import { tile } from './Tset.js'
-import { Vec } from './Vec.js'
+import { draw } from './Tset.js'
+import { Vec, copy, dist } from './Vec.js'
 import { towerMap } from './Maps.js'
 import { img } from './Tmap.js'
 import { easeInOutQuad } from './Ease.js'
@@ -9,12 +9,12 @@ import { easeInOutQuad } from './Ease.js'
 export const txt = [
   [
     ['SOUTHERN TOWER OF SPELLS', 0],
-    ['is known for powerful mages', 6],
+    ['is known for powerful mages', 2],
     [' ', 0],
     ['After years of education', 0],
-    ['YOUNG MAGE', 4],
+    ['YOUNG MAGE', 2],
     [' ', 0],
-    ['GOES BACK', 2],
+    ['GOES BACK', 1],
     ['to his village']
   ]
 ]
@@ -36,35 +36,24 @@ export class Tower {
   constructor (Game) {
     this.game = Game
 
-    this.inter = new Intermission(this.game, txt)
+    this.inter = new Interm(this.game, txt)
     this.map = towerMap()
-    this.map.image = img(this.map, this.game.tls)
-    this.overlay = Canvas(this.map.image.width, this.map.image.height)
+    this.map.img = img(this.map, this.game.tls)
 
-    this.start = Vec(16 * 16 - 8, 12 * 16)
-    this.end = Vec(16 * 16 - 8, (79 - 4) * 16 - 8)
+    this.scrA = Canvas(this.map.img.width, this.map.img.height)
+
+    const center = this.scrA.width / 2
+    const margin = 256 + 128
+
+    this.start = Vec(center, margin)
+    this.end = Vec(center, this.scrA.height - margin)
+    this.camA = copy(this.start)
 
     this.time = 0
-    this.endtime = 8
-    this.distance = this.end.y - this.start.y
+    this.endtime = 5
+    this.distance = dist(this.start, this.end)
 
-    this.pos = {}
-    this.pos.x = this.start.x
-    this.pos.y = this.start.y
-
-    this.width = 33 * 16
-    this.height = 33 * 16
-    this.halfWidth = this.width / 2
-    this.halfHeight = this.height / 2
-    this.scale = 2
-
-    this.player = {
-      x: 16 * 16,
-      y: 79 * 16
-    }
-    this.playerTile = tile(this.game.tls, 97)
-
-    this.walks = false
+    this.player = Vec(256, 1264)
   }
 
   prepare () {
@@ -75,15 +64,15 @@ export class Tower {
     this.time += dt
     this.inter.update(dt)
 
-    if (this.time <= 8) {
-      this.pos.y = this.start.y + Math.floor(easeInOutQuad(this.time / this.endtime) * this.distance)
+    if (this.time <= this.endtime) {
+      this.camA.y = this.start.y + Math.floor(easeInOutQuad(this.time / this.endtime) * this.distance)
     }
 
-    if (this.time >= 14) {
+    if (this.time >= 6) {
       this.player.y += 20 * dt
     }
 
-    if (this.time >= 20) {
+    if (this.time >= 10) {
       this.game.changeStateInn()
     }
   }
@@ -109,24 +98,8 @@ export class Tower {
 
     // screen A
 
-    // map
-    const sx = this.pos.x - this.halfWidth
-    const sy = this.pos.y - this.halfHeight
-    const sw = this.width
-    const sh = this.height
-    const dw = sw * s
-    const dh = sh * s
-    const dx = (this.game.screenA.width - dw) / 2
-    const dy = (this.game.screenA.height - dh) / 2
-
-    this.game.screenA.ctx.drawImage(this.map.image, sx, sy, sw, sh, dx, dy, dw, dh)
-
-    this.overlay.ctx.clearRect(0, 0, this.map.image.width, this.map.image.height)
-    this.overlay.ctx.drawImage(this.game.tls.img,
-      this.playerTile.x, this.playerTile.y, this.game.tls.tw, this.game.tls.th,
-      Math.floor(this.player.x), Math.floor(this.player.y), this.game.tls.tw, this.game.tls.th)
-
-    this.game.screenA.ctx.drawImage(this.overlay, sx, sy, sw, sh, dx, dy, dw, dh)
+    this.scrA.ctx.drawImage(this.map.img, 0, 0)
+    draw(this.scrA, this.game.tls, this.player, 97)
 
     this.game.render()
   }

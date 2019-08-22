@@ -3,7 +3,7 @@ import { Canvas } from './Canvas.js'
 const cols = 32
 const rows = 12
 
-export class Intermission {
+export class Interm {
   constructor (Game, txt) {
     this.game = Game
     this.txt = txt

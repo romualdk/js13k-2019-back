@@ -5,6 +5,7 @@
  */
 
 export const Vec = (x, y) => ({ x, y })
+export const copy = (a) => Vec(a.x, a.y)
 export const add = (a, b) => Vec(a.x + b.x, a.y + b.y)
 export const sub = (a, b) => add(a, scale(b, -1))
 export const mul = (a, b) => Vec(a.x * b.x, a.y * b.y)

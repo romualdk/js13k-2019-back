@@ -3,7 +3,7 @@ import { relem } from './Math.js'
 import { Tmap, fill, fillRand, set, put } from './Tmap.js'
 import { OBJ, structs } from './OBJ.js'
 
-const SEG = 33
+export const SEG = 33
 
 // forest
 const F = [1, 1, 1, 2, 7, 7]
