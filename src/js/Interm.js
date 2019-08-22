@@ -1,12 +1,17 @@
 import { Canvas } from './Canvas.js'
 
-const cols = 32
+const cols = 36
 const rows = 12
 
+const defLang = 'en'
+
 export class Interm {
-  constructor (Game, txt) {
+  constructor (Game, txt, lang) {
     this.game = Game
-    this.txt = txt
+
+    const clang = txt[lang] ? lang : defLang
+
+    this.txt = txt[clang]
     this.ctxt = []
 
     this.fnt = this.game.fnt
@@ -20,7 +25,22 @@ export class Interm {
   update (dt) {
     this.time += dt
 
-    if (this.time >= this.linewait) {
+    if (!this.txt[this.screen]) {
+      return
+    }
+
+    if (
+      this.line >= this.txt[this.screen].length &
+      this.time >= this.linewait
+    ) {
+      this.screen += 1
+      this.line = 0
+      this.linewait = 0
+      this.ctxt = []
+      this.canvas.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    }
+
+    if (this.time >= this.linewait & this.screen < this.txt.length) {
       if (this.txt[this.screen][this.line][0]) {
         this.ctxt.push(this.txt[this.screen][this.line][0])
       }

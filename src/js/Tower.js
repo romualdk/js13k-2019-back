@@ -5,32 +5,7 @@ import { Vec, copy, dist, scale } from './Vec.js'
 import { towerMap } from './Maps.js'
 import { img } from './Tmap.js'
 import { easeInOutQuad } from './Ease.js'
-
-export const txt = [
-  [
-    ['SOUTHERN TOWER OF SPELLS', 0],
-    ['is known for powerful mages', 2],
-    [' ', 0],
-    ['After years of education', 0],
-    ['YOUNG MAGE', 2],
-    [' ', 0],
-    ['GOES BACK', 1],
-    ['to his village']
-  ]
-]
-
-export const txtPl = [
-  [
-    ['POLUDNIOWA WIEZA CZAROW', 0],
-    ['jest znana z poteznych magow', 2],
-    [' ', 0],
-    ['Po latach edukacji', 0],
-    ['MLODY MAG', 2],
-    [' ', 0],
-    ['WRACA', 2],
-    ['do swojej wioski']
-  ]
-]
+import { TXT } from './TXT.js'
 
 export class Tower {
   constructor (Game) {
@@ -56,7 +31,7 @@ export class Tower {
     this.distance = dist(this.start, this.end)
 
     // screen B
-    this.inter = new Interm(this.game, txt)
+    this.inter = new Interm(this.game, TXT.tower, this.game.lang)
     this.scrB = this.inter.canvas
     this.camB = scale(Vec(this.scrB.width, this.scrB.height), 0.5)
   }

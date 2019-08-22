@@ -4,9 +4,10 @@ import { Tset } from './js/Tset.js'
 import { SEG } from './js/Maps.js'
 import { Loop } from './js/Loop.js'
 import { Tower } from './js/Tower.js'
+import { Forest } from './js/Forest.js'
 import { Inn } from './js/Inn.js'
 import { Font } from './js/Font.js'
-import { Vec, sub, scale } from './js/Vec.js';
+import { Vec, sub, scale, rot } from './js/Vec.js';
 
 let loaded = 0
 
@@ -18,6 +19,9 @@ function load () {
 }
 
 const G = {}
+
+const language = () => (window.navigator.userLanguage || window.navigator.language).substring(0, 2)
+G.lang = language()
 
 G.imgFont = new Image()
 G.fnt = new Font(G.imgFont, 8, 16, 48)
@@ -81,6 +85,18 @@ function onResize () {
     dp: scale(sub(v, scale(v, G.s)), 0.5) // destination position (scaled)
   }
 }
+/*
+const deg = -45
+const rad = deg * (Math.PI / 180)
+console.log(rad)
+
+const vec = {x: 2, y: 0}
+const x = Math.round(1000 * (vec.x * Math.cos(rad) - vec.y * Math.sin(rad))) / 1000
+const y = Math.round(1000 * (vec.x * Math.sin(rad) + vec.y * Math.cos(rad))) / 1000
+
+console.log(x, y)
+console.log(rot(vec, rad))
+*/
 
 window.addEventListener('resize', onResize, false)
 onResize()
@@ -111,8 +127,13 @@ G.changeStateInn = function () {
   this.loop.setState(this.state)
 }
 
+G.changeStateForest = function () {
+  this.state = new Forest(this)
+  this.loop.setState(this.state)
+}
+
 function init () {
-  G.state = new Tower(G)
+  G.state = new Forest(G)
   G.loop = new Loop(G.state)
   G.loop.start()
 }
