@@ -29,60 +29,56 @@ G.tls = Tset(G.img, 16, 16, 8)
 G.img.onload = load
 G.img.src = './img/tileset.png'
 
-const CAMERA_WIDTH = SEG * G.tls.tw
-const CAMERA_HEIGHT = SEG * G.tls.th
+const CAM_W = SEG * G.tls.tw
+const CAM_H = SEG * G.tls.th
 
-function screenHalfs (width, height) {
-  const portrait = width <= height
+function screenHalfs (w, h) {
+  const p = w <= h // portrait
 
-  const partWidth = portrait ? width : Math.floor(width / 2)
-  const partHeight = portrait ? Math.floor(height / 2) : height
+  const pW = p ? w : Math.floor(w / 2)
+  const pH = p ? Math.floor(h / 2) : h
 
   return {
     A: {
       x: 0,
       y: 0,
-      width: partWidth,
-      height: partHeight
+      width: pW,
+      height: pH
     },
     B: {
-      x: portrait ? 0 : width - partWidth,
-      y: portrait ? height - partHeight : 0,
-      width: partWidth,
-      height: partHeight
+      x: p ? 0 : w - pW,
+      y: p ? h - pH : 0,
+      width: pW,
+      height: pH
     }
   }
 }
 
-function getScale (screen, camera) {
-  const scaleX = Math.ceil(screen.width / camera.width)
-  const scaleY = Math.ceil(screen.height / camera.height)
-  return Math.min(scaleX, scaleY)
+function getScale (scr, cam) {
+  const x = Math.ceil(scr.width / cam.width)
+  const y = Math.ceil(scr.height / cam.height)
+  return Math.min(x, y)
 }
 
 function onResize () {
-  G.screen = Canvas(window.innerWidth, window.innerHeight, 'screen')
-  G.halfs = screenHalfs(G.screen.width, G.screen.height)
-  G.screenA = Canvas(G.halfs.A.width, G.halfs.A.height)
-  G.screenB = Canvas(G.halfs.B.width, G.halfs.B.height)
+  G.scr = Canvas(window.innerWidth, window.innerHeight, 'screen')
+  G.halfs = screenHalfs(G.scr.width, G.scr.height)
+  G.scrA = Canvas(G.halfs.A.width, G.halfs.A.height)
+  G.scrB = Canvas(G.halfs.B.width, G.halfs.B.height)
 
-  G.screenA.scale = getScale(G.halfs.A, { width: CAMERA_WIDTH, height: CAMERA_HEIGHT })
-  G.screenB.scale = getScale(G.halfs.B, { width: CAMERA_WIDTH, height: CAMERA_HEIGHT })
+  G.s = getScale(G.halfs.A, { width: CAM_W, height: CAM_H })
 
-  G.screenA.ctx.fillStyle = '#472d3c'
-  G.screenA.ctx.fillRect(0, 0, G.halfs.A.width, G.halfs.A.height)
+  G.scr.ctx.fillStyle = '#091431'
+  G.scrA.ctx.fillStyle = '#472d3c'
+  G.scrB.ctx.fillStyle = '#091431'
 
-  G.screenB.ctx.fillStyle = '#472d3c'
-  G.screenB.ctx.fillRect(0, 0, G.halfs.B.width, G.halfs.B.height)
+  const v = Vec(G.scrA.width, G.scrA.height)
 
-  const v = Vec(G.screenA.width, G.screenA.height)
-  const s = G.screenA.scale
-
-  G.camA = {
+  G.cam = {
     sd: scale(v, 1), // source dimensions
-    dd: scale(v, s), // destination dimensions
-    sp: scale(v, -0.5), // source positon
-    dp: scale(sub(v, scale(v, s)), 0.5) // destination position
+    dd: scale(v, G.s), // destination dimensions
+    sp: scale(v, -0.5), // source positon (scaled)
+    dp: scale(sub(v, scale(v, G.s)), 0.5) // destination position (scaled)
   }
 }
 
@@ -90,19 +86,24 @@ window.addEventListener('resize', onResize, false)
 onResize()
 
 G.render = function () {
-  G.screenA.ctx.fillRect(0, 0, G.halfs.A.width, G.halfs.A.height)
+  clear(this.scr)
+  clear(this.scrA)
+  clear(this.scrB)
 
-  if (this.state.camA && this.state.scrA) {
-    const c = this.state.camA
-    const a = this.camA
+  camDraw(this.scrA.ctx, this.state.scrA, this.cam, this.state.camA)
+  camDraw(this.scrB.ctx, this.state.scrB, this.cam, this.state.camB)
 
-    this.screenA.ctx.drawImage(this.state.scrA,
-      a.sp.x + c.x, a.sp.y + c.y, a.sd.x, a.sd.y,
-      a.dp.x, a.dp.y, a.dd.x, a.dd.y)
-  }
+  this.scr.ctx.drawImage(this.scrA, this.halfs.A.x, this.halfs.A.y)
+  this.scr.ctx.drawImage(this.scrB, this.halfs.B.x, this.halfs.B.y)
+}
 
-  this.screen.ctx.drawImage(this.screenA, this.halfs.A.x, this.halfs.A.y)
-  this.screen.ctx.drawImage(this.screenB, this.halfs.B.x, this.halfs.B.y)
+const clear = (scr) => {
+  scr.ctx.fillRect(0, 0, scr.width, scr.height)
+}
+
+const camDraw = (ctx, img, c1, c2) => {
+  ctx.drawImage(img, c1.sp.x + c2.x, c1.sp.y + c2.y, c1.sd.x, c1.sd.y,
+    c1.dp.x, c1.dp.y, c1.dd.x, c1.dd.y)
 }
 
 G.changeStateInn = function () {

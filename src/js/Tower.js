@@ -1,7 +1,7 @@
 import { Interm } from './Interm.js'
 import { Canvas } from './Canvas.js'
 import { draw } from './Tset.js'
-import { Vec, copy, dist } from './Vec.js'
+import { Vec, copy, dist, scale } from './Vec.js'
 import { towerMap } from './Maps.js'
 import { img } from './Tmap.js'
 import { easeInOutQuad } from './Ease.js'
@@ -36,12 +36,14 @@ export class Tower {
   constructor (Game) {
     this.game = Game
 
-    this.inter = new Interm(this.game, txt)
+    // screen A
     this.map = towerMap()
     this.map.img = img(this.map, this.game.tls)
+    this.player = Vec(256, 1264)
 
     this.scrA = Canvas(this.map.img.width, this.map.img.height)
 
+    // camera movement
     const center = this.scrA.width / 2
     const margin = 256 + 128
 
@@ -53,7 +55,10 @@ export class Tower {
     this.endtime = 5
     this.distance = dist(this.start, this.end)
 
-    this.player = Vec(256, 1264)
+    // screen B
+    this.inter = new Interm(this.game, txt)
+    this.scrB = this.inter.canvas
+    this.camB = scale(Vec(this.scrB.width, this.scrB.height), 0.5)
   }
 
   prepare () {
@@ -69,7 +74,7 @@ export class Tower {
     }
 
     if (this.time >= 6) {
-      this.player.y += 20 * dt
+      this.player.y += 30 * dt
     }
 
     if (this.time >= 10) {
@@ -78,29 +83,12 @@ export class Tower {
   }
 
   render () {
-    const s = this.game.screenA.scale
-
-    // screen B
-    this.inter.render()
-    this.game.screenB.ctx.fillStyle = '#091431'
-    this.game.screenB.ctx.fillRect(0, 0, this.game.screenB.width, this.game.screenB.height)
-
-    const bsx = 0
-    const bsy = 0
-    const bsw = this.inter.canvas.width
-    const bsh = this.inter.canvas.height
-    const bdw = bsw * s
-    const bdh = bsh * s
-    const bdx = (this.game.screenB.width - bdw) / 2
-    const bdy = (this.game.screenB.height - bdh) / 2
-
-    this.game.screenB.ctx.drawImage(this.inter.canvas, bsx, bsy, bsw, bsh, bdx, bdy, bdw, bdh)
-
     // screen A
-
     this.scrA.ctx.drawImage(this.map.img, 0, 0)
     draw(this.scrA, this.game.tls, this.player, 97)
 
+    // screen B
+    this.inter.render()
     this.game.render()
   }
 }
