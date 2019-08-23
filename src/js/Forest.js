@@ -44,7 +44,12 @@ export class Forest {
     this.npc2.update(dt)
     this.npc3.update(dt)
     this.p1.update(dt)
-    this.camA = add(this.p1.pos, Vec(8, -128))
+
+    const o = this.game.s === 1
+      ? (-1 * this.game.cam.sd.y / 2) + 48
+      : -1 * this.game.cam.dd.y / 10
+
+    this.camA = add(this.p1.pos, Vec(8, o))
   }
 
   render () {

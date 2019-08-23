@@ -85,18 +85,6 @@ function onResize () {
     dp: scale(sub(v, scale(v, G.s)), 0.5) // destination position (scaled)
   }
 }
-/*
-const deg = -45
-const rad = deg * (Math.PI / 180)
-console.log(rad)
-
-const vec = {x: 2, y: 0}
-const x = Math.round(1000 * (vec.x * Math.cos(rad) - vec.y * Math.sin(rad))) / 1000
-const y = Math.round(1000 * (vec.x * Math.sin(rad) + vec.y * Math.cos(rad))) / 1000
-
-console.log(x, y)
-console.log(rot(vec, rad))
-*/
 
 window.addEventListener('resize', onResize, false)
 onResize()
