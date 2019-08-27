@@ -9,6 +9,14 @@ import { Inn } from './js/Inn.js'
 import { Font } from './js/Font.js'
 import { Vec, sub, scale, rot } from './js/Vec.js';
 
+/*
+import { FI, Hero } from './js/FinalFantasy/Hero.js'
+import { spells, magDmg, magHeal } from './js/FinalFantasy/Magic.js'
+import { physDmg } from './js/FinalFantasy/PhysAttack.js'
+import { enemies } from './js/FinalFantasy/Enemy.js'
+*/
+
+// -----
 let loaded = 0
 
 function load () {
