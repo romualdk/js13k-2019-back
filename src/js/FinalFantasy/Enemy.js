@@ -1,5 +1,15 @@
 import { FIRE, ICE } from './Magic.js'
 
+export const Type = {
+  Magical: 1,
+  Dragon: 2,
+  Undead: 4,
+  Were: 16,
+  Aquatic: 32,
+  Mage: 64,
+  Regenerative: 128
+}
+
 export const MAGICAL = 1
 export const DRAGON = 2
 export const GIANT = 4
